@@ -1,0 +1,62 @@
+[project]
+name = "cs336"
+version = "1.0.4"
+description = "CS336 Implement"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "cs336-basics",
+    "cs336-systems",
+    "humanfriendly",
+    "matplotlib",
+    "numpy",
+    "pytest>=8",
+    "regex>=2024.11.6",
+    "submitit>=1.5.2", # job submission for SLURM
+    "tiktoken>=0.9.0",
+    "einops>=0.8.1", # tensor operations
+    "einx>=0.3.0", # more general tensor operations
+    "jaxtyping>=0.3.0", # type hints for pytorch/jax/numpy
+    "torch~=2.7.1; sys_platform != 'darwin' or platform_machine != 'x86_64'",
+    "torch~=2.2.2; sys_platform == 'darwin' and platform_machine == 'x86_64'", # Intel Macs
+    "tqdm>=4.67.1",
+    "wandb>=0.19.7",
+    "pandas>=2",
+    "cython>=3.1.2",
+    "notebook>=7.4.4",
+    "ipykernel>=6.29.5",
+]
+
+[tool.setuptools.packages.find]
+include = ["cs336_systems", "tests"]
+
+[tool.uv]
+package = true
+python-preference = "managed"
+
+[tool.uv.sources]
+cs336-basics = { path = "./cs336_basics", editable = true }  # Change this path to your assignment1-basics repo you want to use your own implementation!
+cs336-systems = { path = "./cs336_systems", editable = true }  # Change this path to your assignment2-systems repo you want to use your own implementation!
+
+
+[tool.pytest.ini_options]
+log_cli = true
+log_cli_level = "WARNING"
+addopts = "-s"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint.extend-per-file-ignores]
+# Also ignore `E402` in all `__init__.py` files.
+"__init__.py" = ["E402", "F401", "F403", "E501"]
+
+[tool.ruff.lint]
+extend-select = ["UP"]
+ignore = [
+    "F722"
+]
+
+[[tool.uv.index]]
+url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple/"
+default = true
