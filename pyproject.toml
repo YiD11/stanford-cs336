@@ -7,10 +7,13 @@ requires-python = ">=3.11"
 dependencies = [
     "cs336-basics",
     "cs336-systems",
+    "cs336-alignment",
     "humanfriendly",
     "matplotlib",
     "numpy",
+    "dotenv",
     "pytest>=8",
+    "transformers>=4.50.0",
     "regex>=2024.11.6",
     "submitit>=1.5.2", # job submission for SLURM
     "tiktoken>=0.9.0",
@@ -25,6 +28,7 @@ dependencies = [
     "cython>=3.1.2",
     "notebook>=7.4.4",
     "ipykernel>=6.29.5",
+    "flash-attn==2.7.4.post1",
 ]
 
 [tool.setuptools.packages.find]
@@ -32,11 +36,13 @@ include = ["cs336_systems", "tests"]
 
 [tool.uv]
 package = true
+no-build-isolation-package = ["flash-attn"]
 python-preference = "managed"
 
 [tool.uv.sources]
 cs336-basics = { path = "./cs336_basics", editable = true }  # Change this path to your assignment1-basics repo you want to use your own implementation!
 cs336-systems = { path = "./cs336_systems", editable = true }  # Change this path to your assignment2-systems repo you want to use your own implementation!
+cs336-alignment = { path = "./cs336_alignment", editable = true }  # Change this path to your assignment5-alignment repo you want to use your own implementation!
 
 
 [tool.pytest.ini_options]
@@ -57,6 +63,6 @@ ignore = [
     "F722"
 ]
 
-[[tool.uv.index]]
-url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple/"
-default = true
+# [[tool.uv.index]]
+# url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple/"
+# default = true
